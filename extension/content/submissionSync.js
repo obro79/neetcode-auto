@@ -3,6 +3,8 @@
     ? "neetcode"
     : "leetcode";
 
+  const EXECUTION_ENDPOINTS = /executecodefunctionhttp|runcodefunctionhttp/i;
+
   function slugFromUrl() {
     const match = window.location.pathname.match(/\/problems\/([^/]+)/);
     return match ? match[1] : null;
@@ -53,7 +55,7 @@
     return text.toLowerCase().includes('"accepted"') || text.includes("Accepted");
   }
 
-  async function handleAccepted(submissionId) {
+  function handleAccepted(submissionId) {
     const slug = slugFromUrl();
     if (!slug) return;
 
@@ -82,43 +84,110 @@
     );
   }
 
-  const originalFetch = window.fetch;
-  window.fetch = async function (...args) {
-    const response = await originalFetch.apply(this, args);
-    try {
-      const clone = response.clone();
-      const bodyText = await clone.text();
-      const url = String(args[0] || "");
-      if (
-        (url.includes("graphql") || url.includes("submit") || url.includes("check")) &&
-        isAcceptedSubmission(bodyText)
-      ) {
-        handleAccepted(url);
-      }
-    } catch (_error) {
-      // Ignore parse failures.
+  function requestUrl(input) {
+    if (typeof input === "string") return input;
+    if (input instanceof Request) return input.url;
+    return String(input?.url || input || "");
+  }
+
+  function isExecutionEndpoint(url) {
+    return EXECUTION_ENDPOINTS.test(String(url));
+  }
+
+  function isNeetCodeSubmissionUrl(url) {
+    const lower = String(url).toLowerCase();
+    if (!lower.includes("neetcode.io") && !lower.includes("/api/")) {
+      return false;
     }
-    return response;
+    return /submit|submission/i.test(lower);
+  }
+
+  function isLeetCodeGraphqlSubmissionBody(body) {
+    if (body == null) return false;
+    const normalized = String(body).toLowerCase();
+    return (
+      normalized.includes("submit") ||
+      (normalized.includes("check") && normalized.includes("submission"))
+    );
+  }
+
+  function shouldInspectFetch(url, body) {
+    if (isExecutionEndpoint(url)) return false;
+    if (isNeetCodeSubmissionUrl(url)) return true;
+    if (/leetcode\.com/i.test(url) && /graphql/i.test(url)) {
+      return isLeetCodeGraphqlSubmissionBody(body);
+    }
+    return false;
+  }
+
+  function shouldInspectXhr(url, body) {
+    if (isExecutionEndpoint(url)) return false;
+    if (isNeetCodeSubmissionUrl(url)) return true;
+    if (/leetcode\.com/i.test(url) && /graphql/i.test(url)) {
+      return isLeetCodeGraphqlSubmissionBody(body);
+    }
+    return false;
+  }
+
+  function inspectResponseText(url, bodyText) {
+    if (!isAcceptedSubmission(bodyText)) return;
+
+    if (/leetcode\.com/i.test(url) && /graphql/i.test(url)) {
+      const lower = bodyText.toLowerCase();
+      if (!lower.includes("submit") && !lower.includes("check")) return;
+    }
+
+    handleAccepted(url);
+  }
+
+  const originalFetch = window.fetch.bind(window);
+  window.fetch = function (input, init) {
+    const url = requestUrl(input);
+    const body =
+      init?.body != null && typeof init.body === "string" ? init.body : null;
+
+    if (!shouldInspectFetch(url, body)) {
+      return originalFetch(input, init);
+    }
+
+    return originalFetch(input, init).then(
+      (response) => {
+        try {
+          const clone = response.clone();
+          return clone.text().then((bodyText) => {
+            inspectResponseText(url, bodyText);
+            return response;
+          });
+        } catch (_error) {
+          return response;
+        }
+      },
+      (error) => Promise.reject(error)
+    );
   };
 
   const originalOpen = XMLHttpRequest.prototype.open;
   const originalSend = XMLHttpRequest.prototype.send;
 
   XMLHttpRequest.prototype.open = function (method, url, ...rest) {
-    this._neetcodeUrl = url;
+    this._neetcodeUrl = String(url || "");
     return originalOpen.call(this, method, url, ...rest);
   };
 
   XMLHttpRequest.prototype.send = function (...args) {
-    this.addEventListener("load", function () {
-      const url = this._neetcodeUrl || "";
-      if (
-        (url.includes("graphql") || url.includes("submit") || url.includes("check")) &&
-        isAcceptedSubmission(this.responseText)
-      ) {
-        handleAccepted(url);
-      }
-    });
+    const url = this._neetcodeUrl || "";
+    const body = args[0];
+
+    if (shouldInspectXhr(url, body)) {
+      this.addEventListener("load", function () {
+        try {
+          inspectResponseText(url, this.responseText);
+        } catch (_error) {
+          // Ignore parse failures.
+        }
+      });
+    }
+
     return originalSend.apply(this, args);
   };
 
