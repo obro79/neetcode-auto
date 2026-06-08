@@ -56,5 +56,5 @@ jobs:
         run: uv run pytest -v --tb=short
         env:
           API_KEY: test-api-key
-          DATABASE_URL: sqlite+aiosqlite:///:memory:
+          DATABASE_URL: "sqlite+aiosqlite:///:memory:"
           SRS_CONFIG_PATH: ../config/srs.config.yaml
