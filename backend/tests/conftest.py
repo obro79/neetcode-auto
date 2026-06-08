@@ -76,6 +76,10 @@ async def client(test_engine, monkeypatch) -> AsyncIterator[AsyncClient]:
 
     app.dependency_overrides[get_session] = override_get_session
     monkeypatch.setattr(db_session, "AsyncSessionLocal", session_factory)
+
+    import app.routes.health as health_module
+
+    monkeypatch.setattr(health_module, "AsyncSessionLocal", session_factory)
     monkeypatch.setenv("API_KEY", "test-api-key")
 
     from app.core.config import get_settings
