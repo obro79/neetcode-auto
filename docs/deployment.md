@@ -27,6 +27,8 @@ EMAIL_TO=owenfisher46@gmail.com
 TIMEZONE=America/Vancouver
 ```
 
+`RESEND_API_KEY` is required for email; set it in Railway (**Variables**) before cron jobs can send mail.
+
 3. Deploy command:
 
 ```bash
@@ -40,20 +42,39 @@ uv run uvicorn app.main:app --host 0.0.0.0 --port $PORT
 
 ## Railway cron jobs
 
-Create two cron triggers in Railway (America/Vancouver):
+Railway has no `railway cron` subcommand. Schedules are configured per **service** (dashboard **Settings → Cron Schedule**) or via **Railway Functions** (`railway functions new --cron "..."`).
 
-| Schedule | Command |
-|----------|---------|
-| `0 7 * * *` | `uv run python -m app.jobs.send_daily --attempt 1` |
-| `30 7 * * *` | `uv run python -m app.jobs.send_daily --attempt 2` |
+**Important:** Do not attach a cron schedule to the main API service (its start command runs Uvicorn). Use **two additional services** from the same `backend/` root (duplicate the service or `railway add --service <name> --repo obro79/neetcode-auto` and set the root directory to `backend`).
 
-Cron jobs need the same env vars as the API service.
+1. Copy all environment variables from the API service (`DATABASE_URL`, `API_KEY`, `RESEND_API_KEY`, email settings, `TIMEZONE`, etc.).
+2. Override **Start Command** (Settings → Deploy) for each cron service:
+
+| Service (suggested name) | Start command | Cron (UTC) |
+|--------------------------|---------------|------------|
+| `send-daily-attempt-1` | `python -m app.jobs.send_daily --attempt 1` | `0 14 * * *` |
+| `send-daily-attempt-2` | `python -m app.jobs.send_daily --attempt 2` | `30 14 * * *` |
+
+Cron expressions use **UTC**. For `TIMEZONE=America/Vancouver`, 7:00 / 7:30 AM local time is **14:00 / 14:30 UTC** during PDT (roughly March–November) and **15:00 / 15:30 UTC** during PST. Adjust when daylight saving changes.
+
+For local/Nixpacks deploys without Docker, use `uv run python -m app.jobs.send_daily --attempt N` instead of `python -m ...`.
+
+Cron containers must **exit** when the job finishes (the `send_daily` job does). If a run stays **Active**, Railway skips the next run.
+
+### Optional: Railway Functions (Bun/TypeScript)
+
+```bash
+railway functions new --path ./railway/send-daily-attempt-1.ts --name send-daily-attempt-1 --cron "0 14 * * *"
+```
+
+Set `API_BASE_URL` and `API_KEY` on the function service and POST to `/daily-sets/today/send?attempt=N`. Prefer duplicate Python cron services unless you want a lightweight HTTP trigger.
 
 ## Chrome extension cutover
 
-1. Open extension popup.
-2. Set API base URL to your Railway URL.
-3. Set the production `API_KEY`.
+See `extension/README.md` for load-unpacked steps.
+
+1. Load the extension from `extension/` in `chrome://extensions`.
+2. Open the popup — API URL defaults to `https://neetcode-auto-production.up.railway.app`.
+3. Paste the production `API_KEY` from Railway (not stored in git).
 4. Enable auto-sync.
 
 ## Disable old Notion automations

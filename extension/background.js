@@ -1,6 +1,6 @@
 const DEFAULT_CONFIG = {
-  apiBaseUrl: "http://localhost:8000",
-  apiKey: "dev-api-key-change-me",
+  apiBaseUrl: "https://neetcode-auto-production.up.railway.app",
+  apiKey: "",
   autoSync: true,
 };
 
