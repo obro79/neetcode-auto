@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from sqlalchemy import Boolean, Date, Enum, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.enums import Confidence, DailySlot, ReviewStage
+from app.enums import Confidence, DailySlot, ReviewStage, enum_values
 from app.models.base import Base
 
 if TYPE_CHECKING:
@@ -19,17 +19,17 @@ class UserProgress(Base):
     problem_id: Mapped[int] = mapped_column(ForeignKey("problems.id"), index=True)
     solved: Mapped[bool] = mapped_column(Boolean, default=False)
     review_stage: Mapped[ReviewStage] = mapped_column(
-        Enum(ReviewStage, name="review_stage"),
+        Enum(ReviewStage, name="review_stage", values_callable=enum_values),
         default=ReviewStage.NEW,
     )
     next_review: Mapped[date | None] = mapped_column(Date, nullable=True)
     last_practiced: Mapped[date | None] = mapped_column(Date, nullable=True)
     confidence: Mapped[Confidence | None] = mapped_column(
-        Enum(Confidence, name="confidence"),
+        Enum(Confidence, name="confidence", values_callable=enum_values),
         nullable=True,
     )
     daily_slot: Mapped[DailySlot | None] = mapped_column(
-        Enum(DailySlot, name="daily_slot"),
+        Enum(DailySlot, name="daily_slot", values_callable=enum_values),
         nullable=True,
     )
 

@@ -2,6 +2,6 @@
 builder = "NIXPACKS"
 
 [deploy]
-startCommand = "uv run alembic upgrade head && uv run python scripts/seed_problems.py && uv run uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+startCommand = "uv run alembic upgrade head && PYTHONPATH=. uv run python scripts/seed_problems.py && uv run uvicorn app.main:app --host 0.0.0.0 --port $PORT"
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 3

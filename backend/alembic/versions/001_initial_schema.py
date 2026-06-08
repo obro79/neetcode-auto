@@ -30,12 +30,6 @@ def upgrade() -> None:
         "review", "focused_new", "random_new", "done", name="daily_slot_item"
     )
 
-    difficulty.create(op.get_bind(), checkfirst=True)
-    review_stage.create(op.get_bind(), checkfirst=True)
-    confidence.create(op.get_bind(), checkfirst=True)
-    daily_slot.create(op.get_bind(), checkfirst=True)
-    daily_slot_item.create(op.get_bind(), checkfirst=True)
-
     op.create_table(
         "problems",
         sa.Column("id", sa.Integer(), primary_key=True),

@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from sqlalchemy import Date, DateTime, Enum, ForeignKey, String, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.enums import DailySlot
+from app.enums import DailySlot, enum_values
 from app.models.base import Base
 
 if TYPE_CHECKING:
@@ -35,7 +35,9 @@ class DailySetItem(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     daily_set_id: Mapped[int] = mapped_column(ForeignKey("daily_sets.id"), index=True)
     problem_id: Mapped[int] = mapped_column(ForeignKey("problems.id"), index=True)
-    slot: Mapped[DailySlot] = mapped_column(Enum(DailySlot, name="daily_slot_item"))
+    slot: Mapped[DailySlot] = mapped_column(
+        Enum(DailySlot, name="daily_slot_item", values_callable=enum_values)
+    )
 
     daily_set: Mapped["DailySet"] = relationship(back_populates="items")
     problem: Mapped["Problem"] = relationship(back_populates="daily_set_items")
