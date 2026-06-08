@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "NeetCode SRS Sync",
+  "version": "1.0.0",
+  "description": "Auto-sync accepted LeetCode and NeetCode submissions to NeetCode SRS backend",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "*://leetcode.com/*",
+    "*://*.leetcode.com/*",
+    "*://neetcode.io/*",
+    "http://localhost:8000/*",
+    "https://*/*"
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "NeetCode SRS"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://leetcode.com/problems/*",
+        "*://*.leetcode.com/problems/*",
+        "*://neetcode.io/problems/*"
+      ],
+      "js": ["content/submissionSync.js"],
+      "run_at": "document_start"
+    }
+  ]
+}
