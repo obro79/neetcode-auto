@@ -1,0 +1,1640 @@
+[
+  {
+    "slug": "maximum-subarray",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "longest-increasing-path-in-matrix",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "insert-greatest-common-divisors-in-linked-list",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "gas-station",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-21",
+    "last_practiced": "2026-05-20",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "sum-of-two-integers",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "last_practiced": "2026-05-23",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "jump-game-ii",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-21",
+    "last_practiced": "2026-05-20",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "minimum-array-end",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "regular-expression-matching",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "minimum-interval-including-query",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "bitwise-and-of-numbers-range",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "last_practiced": "2026-05-23",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "longest-turbulent-subarray",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "reverse-bits",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "last_practiced": "2026-05-23",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "missing-number",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "last_practiced": "2026-05-23",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "count-squares",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "rotate-matrix",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "stone-game-ii",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "reverse-integer",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "multiply-strings",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "spiral-matrix",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "dota2-senate",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "single-number",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "roman-to-integer",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "add-binary",
+    "solved": true,
+    "review_stage": "3d",
+    "next_review": "2026-05-27",
+    "last_practiced": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "valid-parenthesis-string",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-31",
+    "last_practiced": "2026-05-30"
+  },
+  {
+    "slug": "meeting-rooms-iii",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "jump-game-vii",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "merge-triplets-to-form-target",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "pow-x-n",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "hand-of-straights",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "count-subsequences",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "merge-intervals",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-20",
+    "last_practiced": "2026-05-19",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "burst-balloons",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "edit-distance",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "plus-one",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "set-zeroes-in-matrix",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "non-overlapping-intervals",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-20",
+    "last_practiced": "2026-05-19",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "excel-sheet-column-title",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "greatest-common-divisor-of-strings",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "candy",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "meeting-schedule",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-20",
+    "last_practiced": "2026-05-19",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "non-cyclical-number",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "insert-new-interval",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-20",
+    "last_practiced": "2026-05-19",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "jump-game",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-21",
+    "last_practiced": "2026-05-20",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "number-of-one-bits",
+    "solved": true,
+    "review_stage": "7d",
+    "next_review": "2026-06-03",
+    "last_practiced": "2026-05-27",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "maximum-sum-circular-subarray",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "lemonade-change",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-20",
+    "last_practiced": "2026-05-19",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "meeting-schedule-ii",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-20",
+    "last_practiced": "2026-05-19",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "counting-bits",
+    "solved": true,
+    "review_stage": "3d",
+    "next_review": "2026-05-29",
+    "last_practiced": "2026-05-26",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "transpose-matrix",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "partition-labels",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "valid-tree",
+    "solved": true,
+    "review_stage": "3d",
+    "next_review": "2026-05-31",
+    "last_practiced": "2026-05-28",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "min-cost-to-connect-points",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-28",
+    "last_practiced": "2026-05-27"
+  },
+  {
+    "slug": "count-connected-components",
+    "solved": true,
+    "review_stage": "3d",
+    "next_review": "2026-05-31",
+    "last_practiced": "2026-05-28",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "longest-palindromic-substring",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "count-paths",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "open-the-lock",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "build-a-matrix-with-conditions",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "maximum-product-subarray",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "coin-change",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "swim-in-rising-water",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "last-stone-weight-ii",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "network-delay-time",
+    "solved": true,
+    "review_stage": "3d",
+    "next_review": "2026-06-02",
+    "last_practiced": "2026-05-30",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "greatest-common-divisor-traversal",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "interleaving-string",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "surrounded-regions",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "cheapest-flight-path",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-28",
+    "last_practiced": "2026-05-27"
+  },
+  {
+    "slug": "redundant-connection",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-31",
+    "last_practiced": "2026-05-30"
+  },
+  {
+    "slug": "longest-common-subsequence",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "combination-sum-iv",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "perfect-squares",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "coin-change-ii",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "min-cost-climbing-stairs",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "evaluate-division",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "decode-ways",
+    "solved": true,
+    "review_stage": "7d",
+    "next_review": "2026-06-03",
+    "last_practiced": "2026-05-27",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "partition-equal-subset-sum",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "word-ladder",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "stone-game",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "course-schedule-ii",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "minimum-path-sum",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "unique-paths-ii",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "course-schedule",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "foreign-dictionary",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-31",
+    "last_practiced": "2026-05-30"
+  },
+  {
+    "slug": "stone-game-iii",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "word-break",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "minimum-height-trees",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-31",
+    "last_practiced": "2026-05-30"
+  },
+  {
+    "slug": "reconstruct-flight-path",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-31",
+    "last_practiced": "2026-05-30"
+  },
+  {
+    "slug": "buy-and-sell-crypto-with-cooldown",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "longest-increasing-subsequence",
+    "solved": true,
+    "review_stage": "7d",
+    "next_review": "2026-06-03",
+    "last_practiced": "2026-05-27",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "course-schedule-iv",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-31",
+    "last_practiced": "2026-05-30"
+  },
+  {
+    "slug": "integer-break",
+    "solved": false,
+    "review_stage": "new",
+    "next_review": "2026-05-29",
+    "confidence": "struggling"
+  },
+  {
+    "slug": "path-with-minimum-effort",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-27",
+    "last_practiced": "2026-05-26",
+    "confidence": "struggling"
+  },
+  {
+    "slug": "n-th-tribonacci-number",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-17",
+    "last_practiced": "2026-05-16",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "pacific-atlantic-water-flow",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "accounts-merge",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "climbing-stairs",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "palindromic-substrings",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "house-robber",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "house-robber-ii",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "target-sum",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "extra-characters-in-a-string",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "sum-of-all-subset-xor-totals",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "last-stone-weight",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-15",
+    "last_practiced": "2026-05-14",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "verifying-an-alien-dictionary",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "rotting-fruit",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "task-scheduling",
+    "solved": true,
+    "review_stage": "3d",
+    "next_review": "2026-05-30",
+    "last_practiced": "2026-05-27",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "islands-and-treasure",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "binary-tree-maximum-path-sum",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "construct-quad-tree",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-31",
+    "last_practiced": "2026-05-30"
+  },
+  {
+    "slug": "house-robber-iii",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "count-number-of-islands",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "island-perimeter",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "count-good-nodes-in-binary-tree",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "implement-prefix-tree",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "permutations",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "search-for-word",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "find-the-town-judge",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "subsets-ii",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "design-word-search-data-structure",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "palindrome-partitioning",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-16",
+    "last_practiced": "2026-05-15",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "find-median-in-a-data-stream",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "word-break-ii",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "delete-leaves-with-a-given-value",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "n-queens-ii",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "combinations-of-a-phone-number",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "n-queens",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "kth-largest-integer-in-a-stream",
+    "solved": true,
+    "review_stage": "3d",
+    "next_review": "2026-06-02",
+    "last_practiced": "2026-05-30",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "partition-to-k-equal-sum-subsets",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-16",
+    "last_practiced": "2026-05-15",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "clone-graph",
+    "solved": true,
+    "review_stage": "3d",
+    "next_review": "2026-05-31",
+    "last_practiced": "2026-05-28",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "binary-tree-from-preorder-and-inorder-traversal",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "matchsticks-to-square",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "subsets",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "combinations",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "kth-smallest-integer-in-bst",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "single-threaded-cpu",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "permutations-ii",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "search-for-word-ii",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "car-pooling",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "valid-binary-search-tree",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "reorganize-string",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "combination-target-sum",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "design-twitter-feed",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "combination-target-sum-ii",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "kth-largest-element-in-an-array",
+    "solved": true,
+    "review_stage": "3d",
+    "next_review": "2026-06-02",
+    "last_practiced": "2026-05-30",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "longest-happy-string",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "max-area-of-island",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "generate-parentheses",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-16",
+    "last_practiced": "2026-05-15",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "k-closest-points-to-origin",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "ipo",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "serialize-and-deserialize-binary-tree",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "capacity-to-ship-packages-within-d-days",
+    "solved": true,
+    "review_stage": "3d",
+    "next_review": "2026-05-29",
+    "last_practiced": "2026-05-26",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "copy-linked-list-with-random-pointer",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "maximum-frequency-stack",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "design-circular-queue",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "sqrtx",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "binary-tree-postorder-traversal",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "lru-cache",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "reverse-nodes-in-k-group",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "insert-into-a-binary-search-tree",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "car-fleet",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "lfu-cache",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "merge-two-sorted-linked-lists",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "simplify-path",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "split-array-largest-sum",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "find-minimum-in-rotated-sorted-array",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "search-2d-matrix",
+    "solved": true,
+    "review_stage": "3d",
+    "next_review": "2026-05-29",
+    "last_practiced": "2026-05-26",
+    "confidence": "solid"
+  },
+  {
+    "slug": "search-insert-position",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "merge-k-sorted-linked-lists",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "asteroid-collision",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-15",
+    "last_practiced": "2026-05-14",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "median-of-two-sorted-arrays",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "time-based-key-value-store",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "binary-tree-diameter",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "binary-tree-preorder-traversal",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "reverse-linked-list-ii",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "largest-rectangle-in-histogram",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "remove-node-from-end-of-linked-list",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "find-duplicate-integer",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "level-order-traversal-of-binary-tree",
+    "solved": true,
+    "review_stage": "3d",
+    "next_review": "2026-06-02",
+    "last_practiced": "2026-05-30",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "eating-bananas",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "online-stock-span",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-15",
+    "last_practiced": "2026-05-14",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "add-two-numbers",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "linked-list-cycle-detection",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "subtree-of-a-binary-tree",
+    "solved": true,
+    "review_stage": "3d",
+    "next_review": "2026-05-31",
+    "last_practiced": "2026-05-28",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "same-binary-tree",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "binary-tree-right-side-view",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "daily-temperatures",
+    "solved": true,
+    "review_stage": "3d",
+    "next_review": "2026-05-29",
+    "last_practiced": "2026-05-26",
+    "confidence": "solid"
+  },
+  {
+    "slug": "binary-tree-inorder-traversal",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "balanced-binary-tree",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "reorder-linked-list",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-17",
+    "last_practiced": "2026-05-16",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "delete-node-in-a-bst",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "lowest-common-ancestor-in-binary-search-tree",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "decode-string",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-15",
+    "last_practiced": "2026-05-14",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "search-in-rotated-sorted-array-ii",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "depth-of-binary-tree",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "find-in-mountain-array",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "reverse-a-linked-list",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-17",
+    "last_practiced": "2026-05-16",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "find-target-in-rotated-sorted-array",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "binary-search",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "invert-a-binary-tree",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "guess-number-higher-or-lower",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "majority-element",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-14",
+    "last_practiced": "2026-05-13",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "majority-element-ii",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-14",
+    "last_practiced": "2026-05-13",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "is-anagram",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "remove-duplicates-from-sorted-array",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "three-integer-sum",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "design-hashmap",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "top-k-elements-in-list",
+    "solved": true,
+    "review_stage": "3d",
+    "next_review": "2026-06-04",
+    "last_practiced": "2026-06-01",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "max-water-container",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "merge-strings-alternately",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "evaluate-reverse-polish-notation",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-14",
+    "last_practiced": "2026-05-13",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "longest-substring-without-duplicates",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "products-of-array-discluding-self",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "implement-stack-using-queues",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-15",
+    "last_practiced": "2026-05-14",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "trapping-rain-water",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "sort-an-array",
+    "solved": true,
+    "review_stage": "3d",
+    "next_review": "2026-06-04",
+    "last_practiced": "2026-06-01",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "merge-sorted-array",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "boats-to-save-people",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "concatenation-of-array",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "permutation-string",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "design-hashset",
+    "solved": true,
+    "review_stage": "3d",
+    "next_review": "2026-06-04",
+    "last_practiced": "2026-06-01",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "anagram-groups",
+    "solved": true,
+    "review_stage": "3d",
+    "next_review": "2026-06-04",
+    "last_practiced": "2026-06-01",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "4sum",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "duplicate-integer",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "implement-queue-using-stacks",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-15",
+    "last_practiced": "2026-05-14",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "sliding-window-maximum",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "valid-sudoku",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-13",
+    "last_practiced": "2026-05-12",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "string-encode-and-decode",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "sort-colors",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-13",
+    "last_practiced": "2026-05-12",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "minimum-stack",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-14",
+    "last_practiced": "2026-05-13",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "subarray-sum-equals-k",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-14",
+    "last_practiced": "2026-05-13",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "range-sum-query-2d-immutable",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "minimum-window-with-characters",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "first-missing-positive",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "baseball-game",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-14",
+    "last_practiced": "2026-05-13",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "contains-duplicate-ii",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "minimum-size-subarray-sum",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "longest-repeating-substring-with-replacement",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "remove-element",
+    "solved": false,
+    "review_stage": "new"
+  },
+  {
+    "slug": "longest-consecutive-sequence",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-13",
+    "last_practiced": "2026-05-12",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "buy-and-sell-crypto",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "longest-common-prefix",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-13",
+    "last_practiced": "2026-05-12",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "two-integer-sum",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "validate-parentheses",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "reverse-string",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "valid-palindrome-ii",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "is-palindrome",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "rotate-array",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "best-time-to-buy-and-sell-stock-ii",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-22",
+    "last_practiced": "2026-05-21",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "find-k-closest-elements",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  },
+  {
+    "slug": "two-integer-sum-ii",
+    "solved": true,
+    "review_stage": "1d",
+    "next_review": "2026-05-24",
+    "confidence": "getting_there"
+  }
+]
