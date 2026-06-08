@@ -1,0 +1,9 @@
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+startCommand = "python -m app.jobs.send_daily --attempt 2"
+cronSchedule = "30 14 * * *"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 1

@@ -42,31 +42,70 @@ uv run uvicorn app.main:app --host 0.0.0.0 --port $PORT
 
 ## Railway cron jobs
 
-Railway has no `railway cron` subcommand. Schedules are configured per **service** (dashboard **Settings → Cron Schedule**) or via **Railway Functions** (`railway functions new --cron "..."`).
+Railway has no `railway cron` subcommand. Cron schedules are set per **service** via dashboard **Settings → Deploy → Cron Schedule** or via config-as-code (`deploy.cronSchedule` in `railway.toml` / `railway.json`). See [Cron jobs](https://docs.railway.com/cron-jobs).
 
-**Important:** Do not attach a cron schedule to the main API service (its start command runs Uvicorn). Use **two additional services** from the same `backend/` root (duplicate the service or `railway add --service <name> --repo obro79/neetcode-auto` and set the root directory to `backend`).
+**Do not** attach a cron schedule to the main API service (`neetcode-auto`); its image runs Uvicorn via `scripts/start.sh`. Use **two extra services** from the same `backend/` root.
 
-1. Copy all environment variables from the API service (`DATABASE_URL`, `API_KEY`, `RESEND_API_KEY`, email settings, `TIMEZONE`, etc.).
-2. Override **Start Command** (Settings → Deploy) for each cron service:
+### Production layout (neetcode-auto project)
 
-| Service (suggested name) | Start command | Cron (UTC) |
-|--------------------------|---------------|------------|
-| `send-daily-attempt-1` | `python -m app.jobs.send_daily --attempt 1` | `0 14 * * *` |
-| `send-daily-attempt-2` | `python -m app.jobs.send_daily --attempt 2` | `30 14 * * *` |
+| Service | Start command | Cron (UTC) | Config file |
+|---------|---------------|------------|-------------|
+| `neetcode-auto` | Dockerfile `CMD` → `start.sh` (API) | *(none)* | `backend/railway.toml` |
+| `send-daily-1` | `python -m app.jobs.send_daily --attempt 1` | `0 14 * * *` | `backend/railway.send-daily-1.toml` |
+| `send-daily-2` | `python -m app.jobs.send_daily --attempt 2` | `30 14 * * *` | `backend/railway.send-daily-2.toml` |
 
-Cron expressions use **UTC**. For `TIMEZONE=America/Vancouver`, 7:00 / 7:30 AM local time is **14:00 / 14:30 UTC** during PDT (roughly March–November) and **15:00 / 15:30 UTC** during PST. Adjust when daylight saving changes.
+Cron expressions are **UTC**. With `TIMEZONE=America/Vancouver`, 7:00 / 7:30 AM local is **14:00 / 14:30 UTC** during PDT (UTC−7, roughly March–November) and **15:00 / 15:30 UTC** during PST. Adjust schedules when daylight saving changes.
 
-For local/Nixpacks deploys without Docker, use `uv run python -m app.jobs.send_daily --attempt N` instead of `python -m ...`.
+Copy the same app env vars as the API service: `DATABASE_URL`, `API_KEY`, `RESEND_API_KEY`, `EMAIL_FROM`, `EMAIL_TO`, `TIMEZONE`, `APP_NAME`, `ENVIRONMENT`, etc. Omit `PORT` on cron services.
 
-Cron containers must **exit** when the job finishes (the `send_daily` job does). If a run stays **Active**, Railway skips the next run.
+### CLI setup (what works today)
 
-### Optional: Railway Functions (Bun/TypeScript)
+```bash
+cd backend
+railway link  # project neetcode-auto, environment production
+
+# Create empty services (no cron flag on `railway add`)
+railway add --service send-daily-1 --json
+railway add --service send-daily-2 --json
+
+# Copy variables from API → each cron service (keys only shown)
+railway variable list --service neetcode-auto --kv | rg -v '^RAILWAY_' | rg -v '^PORT=' | rg -v '^NIXPACKS_'
+# For each KEY=VALUE line, per target service:
+#   printf '%s' "$value" | railway variable set KEY --stdin --service send-daily-1 --skip-deploys
+
+# Deploy with per-service config-as-code (cron + start command)
+cp railway.toml railway.toml.api
+cp railway.send-daily-1.toml railway.toml && railway up --service send-daily-1 --detach -y
+cp railway.send-daily-2.toml railway.toml && railway up --service send-daily-2 --detach -y
+mv railway.toml.api railway.toml
+```
+
+`railway service source connect --repo owner/repo` failed from this environment (“User does not have access to the repo”); connect GitHub in the dashboard if you want autodeploys on push.
+
+### Dashboard steps (if not using CLI deploy swap)
+
+1. Open project **neetcode-auto** → service **send-daily-1**.
+2. **Settings → Source**: connect repo `obro79/neetcode-auto`, branch `main`, root directory **`backend`** (match the API service).
+3. **Settings → Config-as-code**: set config file path to **`railway.send-daily-1.toml`** (repo-relative under `backend/`), *or* paste **Start command** and **Cron schedule** under **Deploy** manually.
+4. **Variables**: ensure they match the API service (Shared Variables or duplicate keys).
+5. Repeat for **send-daily-2** with `railway.send-daily-2.toml` and cron `30 14 * * *`.
+6. **Deploy** each service once; confirm deployment details show `cronSchedule` and `startCommand`.
+
+Cron containers must **exit** when the job finishes (`app/jobs/send_daily.py` does). If a run stays **Active**, Railway skips the next scheduled run.
+
+### Railway pricing (2026)
+
+- **Free trial**: one-time **$5** usage credit for new accounts (expires in **30 days**); no card required to start trial per [pricing FAQ](https://railway.com/pricing).
+- **Hobby**: **$5/month** subscription; includes **$5/month** of usage (does not roll over). Usage above that is billed on top of the subscription.
+- Each cron service counts as its own service toward usage (short-lived cron runs are usually cheap vs. a 24/7 API).
+
+### Optional: Railway Functions
 
 ```bash
 railway functions new --path ./railway/send-daily-attempt-1.ts --name send-daily-attempt-1 --cron "0 14 * * *"
 ```
 
-Set `API_BASE_URL` and `API_KEY` on the function service and POST to `/daily-sets/today/send?attempt=N`. Prefer duplicate Python cron services unless you want a lightweight HTTP trigger.
+Prefer duplicate Python cron services unless you want a lightweight HTTP trigger to `/daily-sets/today/send?attempt=N`.
 
 ## Chrome extension cutover
 
