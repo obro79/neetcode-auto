@@ -3,8 +3,6 @@
     ? "neetcode"
     : "leetcode";
 
-  const EXECUTION_ENDPOINTS = /executecodefunctionhttp|runcodefunctionhttp/i;
-
   function slugFromUrl() {
     const match = window.location.pathname.match(/\/problems\/([^/]+)/);
     return match ? match[1] : null;
@@ -55,7 +53,48 @@
     return text.toLowerCase().includes('"accepted"') || text.includes("Accepted");
   }
 
-  function handleAccepted(submissionId) {
+  function requestUrl(input) {
+    if (typeof input === "string") return input;
+    if (input instanceof Request) return input.url;
+    if (input?.url) return input.url;
+    return String(input || "");
+  }
+
+  function isSubmissionResultUrl(url) {
+    const u = String(url || "").toLowerCase();
+
+    if (
+      u.includes("executecodefunctionhttp") ||
+      u.includes("/execute") ||
+      u.includes("/run") ||
+      u.includes("/test")
+    ) {
+      return false;
+    }
+
+    if (SOURCE === "leetcode" && u.includes("graphql")) {
+      return true;
+    }
+
+    if (SOURCE === "neetcode") {
+      return u.includes("submit") || u.includes("submissions");
+    }
+
+    return false;
+  }
+
+  async function inspectSubmissionResponse(response, url) {
+    try {
+      const bodyText = await response.text();
+      if (isAcceptedSubmission(bodyText)) {
+        handleAccepted(url);
+      }
+    } catch (_error) {
+      // Ignore parse failures; never throw to caller.
+    }
+  }
+
+  async function handleAccepted(submissionId) {
     const slug = slugFromUrl();
     if (!slug) return;
 
@@ -84,110 +123,36 @@
     );
   }
 
-  function requestUrl(input) {
-    if (typeof input === "string") return input;
-    if (input instanceof Request) return input.url;
-    return String(input?.url || input || "");
-  }
-
-  function isExecutionEndpoint(url) {
-    return EXECUTION_ENDPOINTS.test(String(url));
-  }
-
-  function isNeetCodeSubmissionUrl(url) {
-    const lower = String(url).toLowerCase();
-    if (!lower.includes("neetcode.io") && !lower.includes("/api/")) {
-      return false;
-    }
-    return /submit|submission/i.test(lower);
-  }
-
-  function isLeetCodeGraphqlSubmissionBody(body) {
-    if (body == null) return false;
-    const normalized = String(body).toLowerCase();
-    return (
-      normalized.includes("submit") ||
-      (normalized.includes("check") && normalized.includes("submission"))
-    );
-  }
-
-  function shouldInspectFetch(url, body) {
-    if (isExecutionEndpoint(url)) return false;
-    if (isNeetCodeSubmissionUrl(url)) return true;
-    if (/leetcode\.com/i.test(url) && /graphql/i.test(url)) {
-      return isLeetCodeGraphqlSubmissionBody(body);
-    }
-    return false;
-  }
-
-  function shouldInspectXhr(url, body) {
-    if (isExecutionEndpoint(url)) return false;
-    if (isNeetCodeSubmissionUrl(url)) return true;
-    if (/leetcode\.com/i.test(url) && /graphql/i.test(url)) {
-      return isLeetCodeGraphqlSubmissionBody(body);
-    }
-    return false;
-  }
-
-  function inspectResponseText(url, bodyText) {
-    if (!isAcceptedSubmission(bodyText)) return;
-
-    if (/leetcode\.com/i.test(url) && /graphql/i.test(url)) {
-      const lower = bodyText.toLowerCase();
-      if (!lower.includes("submit") && !lower.includes("check")) return;
+  const originalFetch = window.fetch;
+  window.fetch = async function (...args) {
+    const url = requestUrl(args[0]);
+    if (!isSubmissionResultUrl(url)) {
+      return originalFetch.apply(this, args);
     }
 
-    handleAccepted(url);
-  }
-
-  const originalFetch = window.fetch.bind(window);
-  window.fetch = function (input, init) {
-    const url = requestUrl(input);
-    const body =
-      init?.body != null && typeof init.body === "string" ? init.body : null;
-
-    if (!shouldInspectFetch(url, body)) {
-      return originalFetch(input, init);
-    }
-
-    return originalFetch(input, init).then(
-      (response) => {
-        try {
-          const clone = response.clone();
-          return clone.text().then((bodyText) => {
-            inspectResponseText(url, bodyText);
-            return response;
-          });
-        } catch (_error) {
-          return response;
-        }
-      },
-      (error) => Promise.reject(error)
-    );
+    const res = await originalFetch.apply(this, args);
+    void inspectSubmissionResponse(res.clone(), url);
+    return res;
   };
 
   const originalOpen = XMLHttpRequest.prototype.open;
   const originalSend = XMLHttpRequest.prototype.send;
 
   XMLHttpRequest.prototype.open = function (method, url, ...rest) {
-    this._neetcodeUrl = String(url || "");
+    this._neetcodeUrl = url;
+    this._neetcodeIsSubmission = isSubmissionResultUrl(url);
     return originalOpen.call(this, method, url, ...rest);
   };
 
   XMLHttpRequest.prototype.send = function (...args) {
-    const url = this._neetcodeUrl || "";
-    const body = args[0];
-
-    if (shouldInspectXhr(url, body)) {
+    if (this._neetcodeIsSubmission) {
       this.addEventListener("load", function () {
-        try {
-          inspectResponseText(url, this.responseText);
-        } catch (_error) {
-          // Ignore parse failures.
-        }
+        void inspectSubmissionResponse(
+          { text: async () => this.responseText },
+          this._neetcodeUrl || ""
+        );
       });
     }
-
     return originalSend.apply(this, args);
   };
 
