@@ -13,7 +13,7 @@ from app.enums import Difficulty, ReviewStage
 from app.models.problem import Problem
 from app.models.user_progress import UserProgress
 
-DATA_PATH = Path(__file__).resolve().parents[2] / "data" / "neetcode_250.json"
+DATA_PATH = Path(__file__).resolve().parents[1] / "data" / "neetcode_250.json"
 
 
 def _normalize_difficulty(value: str) -> Difficulty:
