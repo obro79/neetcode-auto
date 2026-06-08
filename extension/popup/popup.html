@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NeetCode SRS</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <h1>NeetCode SRS</h1>
+      <label>
+        API base URL
+        <input id="apiBaseUrl" type="url" placeholder="http://localhost:8000" />
+      </label>
+      <label>
+        API key
+        <input id="apiKey" type="password" />
+      </label>
+      <label class="checkbox">
+        <input id="autoSync" type="checkbox" />
+        Auto-sync accepted submissions
+      </label>
+      <button id="saveBtn">Save settings</button>
+      <button id="manualBtn" class="secondary">Mark current problem done</button>
+      <p id="status" class="status"></p>
+      <p id="lastSync" class="meta"></p>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>
