@@ -64,9 +64,6 @@ def test_excludes_linked_list_and_2d_dp() -> None:
         _candidate(4, pattern="Tries", sort_order=4),
     ]
     selected = build_daily_set(candidates, today)
-    chosen_patterns = {
-        item.pattern
-        for item in selected.focused_new + selected.random_new
-    }
+    chosen_patterns = {item.pattern for item in selected.focused_new + selected.random_new}
     assert "Linked List" not in chosen_patterns
     assert "2-D Dynamic Programming" not in chosen_patterns

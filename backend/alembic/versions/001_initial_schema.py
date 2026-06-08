@@ -19,16 +19,10 @@ depends_on: str | Sequence[str] | None = None
 
 def upgrade() -> None:
     difficulty = sa.Enum("easy", "medium", "hard", name="difficulty")
-    review_stage = sa.Enum(
-        "new", "1d", "3d", "7d", "14d", "30d", "mastered", name="review_stage"
-    )
+    review_stage = sa.Enum("new", "1d", "3d", "7d", "14d", "30d", "mastered", name="review_stage")
     confidence = sa.Enum("struggling", "getting_there", "solid", name="confidence")
-    daily_slot = sa.Enum(
-        "review", "focused_new", "random_new", "done", name="daily_slot"
-    )
-    daily_slot_item = sa.Enum(
-        "review", "focused_new", "random_new", "done", name="daily_slot_item"
-    )
+    daily_slot = sa.Enum("review", "focused_new", "random_new", "done", name="daily_slot")
+    daily_slot_item = sa.Enum("review", "focused_new", "random_new", "done", name="daily_slot_item")
 
     op.create_table(
         "problems",
@@ -76,9 +70,7 @@ def upgrade() -> None:
         sa.Column("daily_set_id", sa.Integer(), sa.ForeignKey("daily_sets.id"), nullable=False),
         sa.Column("problem_id", sa.Integer(), sa.ForeignKey("problems.id"), nullable=False),
         sa.Column("slot", daily_slot_item, nullable=False),
-        sa.UniqueConstraint(
-            "daily_set_id", "problem_id", name="uq_daily_set_problem"
-        ),
+        sa.UniqueConstraint("daily_set_id", "problem_id", name="uq_daily_set_problem"),
     )
     op.create_index("ix_daily_set_items_daily_set_id", "daily_set_items", ["daily_set_id"])
     op.create_index("ix_daily_set_items_problem_id", "daily_set_items", ["problem_id"])
@@ -89,9 +81,7 @@ def upgrade() -> None:
         sa.Column("set_date", sa.Date(), nullable=False),
         sa.Column("sent_at", sa.DateTime(timezone=True), nullable=False),
         sa.Column("attempt", sa.Integer(), nullable=False),
-        sa.UniqueConstraint(
-            "set_date", "attempt", name="uq_email_log_set_date_attempt"
-        ),
+        sa.UniqueConstraint("set_date", "attempt", name="uq_email_log_set_date_attempt"),
     )
     op.create_index("ix_email_log_set_date", "email_log", ["set_date"])
 

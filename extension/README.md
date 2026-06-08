@@ -16,11 +16,20 @@ Syncs accepted LeetCode / NeetCode submissions to the NeetCode Auto API.
 2. **API base URL** defaults to production: `https://neetcode-auto-production.up.railway.app`.
 3. Paste your production **API key** (from Railway `API_KEY` — never commit this value).
 4. Click **Save settings**.
-5. Optionally enable **Auto-sync accepted submissions**.
+5. Enable **Auto-sync accepted submissions**.
+
+The extension fetches `GET /config/public` for LeetCode→catalog slug aliases.
+
+## After Accepted
+
+When a submission is accepted, a small panel asks how it went:
+
+- **Struggling** / **Getting There** / **Solid** — syncs with confidence to `/completions`
+- **Skip** — no sync
 
 ## Manual sync
 
-On a LeetCode or NeetCode problem tab, open the popup and click **Mark current problem done**.
+On a LeetCode or NeetCode problem tab, open the popup and click **Mark current problem done** (same confidence picker flow via content script on next accepted solve, or immediate sync from popup).
 
 ## Permissions
 

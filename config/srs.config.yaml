@@ -1,0 +1,113 @@
+timezone: America/Vancouver
+
+catalog:
+  path: data/neetcode_250.json
+
+daily_set:
+  review_count: 4
+  focused_new_count: 2
+  random_new_count: 2
+  excluded_patterns:
+    - Linked List
+    - 2-D Dynamic Programming
+  focus_pattern_order:
+    - Advanced Graphs
+    - Math & Geometry
+    - Greedy
+    - Tries
+
+srs:
+  stages: [new, 1d, 3d, 7d, 14d, 30d, mastered]
+  intervals_days:
+    1d: 1
+    3d: 3
+    7d: 7
+    14d: 14
+    30d: 30
+  struggling_interval_days: 1
+
+email:
+  to: owenfisher46@gmail.com
+  from: "NeetCode SRS <onboarding@resend.dev>"
+  anchor_time: "07:00"
+  backoff_minutes: [0, 30, 90, 210]
+  max_attempts_per_day: 4
+
+extension:
+  sync_only_daily_set: false
+
+slug_aliases:
+  3sum: three-integer-sum
+  alien-dictionary: foreign-dictionary
+  best-time-to-buy-and-sell-stock: buy-and-sell-crypto
+  best-time-to-buy-and-sell-stock-with-cooldown: buy-and-sell-crypto-with-cooldown
+  binary-tree-level-order-traversal: level-order-traversal-of-binary-tree
+  cheapest-flights-within-k-stops: cheapest-flight-path
+  combination-sum: combination-target-sum
+  combination-sum-ii: combination-target-sum-ii
+  construct-binary-tree-from-preorder-and-inorder-traversal: binary-tree-from-preorder-and-inorder-traversal
+  container-with-most-water: max-water-container
+  contains-duplicate: duplicate-integer
+  copy-list-with-random-pointer: copy-linked-list-with-random-pointer
+  design-add-and-search-words-data-structure: design-word-search-data-structure
+  design-twitter: design-twitter-feed
+  detect-squares: count-squares
+  diameter-of-binary-tree: binary-tree-diameter
+  distinct-subsequences: count-subsequences
+  encode-and-decode-strings: string-encode-and-decode
+  find-median-from-data-stream: find-median-in-a-data-stream
+  find-the-duplicate-number: find-duplicate-integer
+  graph-valid-tree: valid-tree
+  group-anagrams: anagram-groups
+  happy-number: non-cyclical-number
+  implement-trie-prefix-tree: implement-prefix-tree
+  insert-interval: insert-new-interval
+  invert-binary-tree: invert-a-binary-tree
+  koko-eating-bananas: eating-bananas
+  kth-largest-element-in-a-stream: kth-largest-integer-in-a-stream
+  kth-smallest-element-in-a-bst: kth-smallest-integer-in-bst
+  letter-combinations-of-a-phone-number: combinations-of-a-phone-number
+  linked-list-cycle: linked-list-cycle-detection
+  longest-increasing-path-in-a-matrix: longest-increasing-path-in-matrix
+  longest-repeating-character-replacement: longest-repeating-substring-with-replacement
+  longest-substring-without-repeating-characters: longest-substring-without-duplicates
+  lowest-common-ancestor-of-a-binary-search-tree: lowest-common-ancestor-in-binary-search-tree
+  maximum-depth-of-binary-tree: depth-of-binary-tree
+  meeting-rooms: meeting-schedule
+  meeting-rooms-ii: meeting-schedule-ii
+  merge-k-sorted-lists: merge-k-sorted-linked-lists
+  merge-triplets-to-form-target-triplet: merge-triplets-to-form-target
+  merge-two-sorted-lists: merge-two-sorted-linked-lists
+  min-cost-to-connect-all-points: min-cost-to-connect-points
+  min-stack: minimum-stack
+  minimum-interval-to-include-each-query: minimum-interval-including-query
+  minimum-window-substring: minimum-window-with-characters
+  number-of-1-bits: number-of-one-bits
+  number-of-connected-components-in-an-undirected-graph: count-connected-components
+  number-of-islands: count-number-of-islands
+  permutation-in-string: permutation-string
+  powx-n: pow-x-n
+  product-of-array-except-self: products-of-array-discluding-self
+  reconstruct-itinerary: reconstruct-flight-path
+  remove-nth-node-from-end-of-list: remove-node-from-end-of-linked-list
+  reorder-list: reorder-linked-list
+  reverse-linked-list: reverse-a-linked-list
+  rotate-image: rotate-matrix
+  rotting-oranges: rotting-fruit
+  same-tree: same-binary-tree
+  search-a-2d-matrix: search-2d-matrix
+  search-in-rotated-sorted-array: find-target-in-rotated-sorted-array
+  set-matrix-zeroes: set-zeroes-in-matrix
+  subtree-of-another-tree: subtree-of-a-binary-tree
+  task-scheduler: task-scheduling
+  top-k-frequent-elements: top-k-elements-in-list
+  two-sum: two-integer-sum
+  two-sum-ii-input-array-is-sorted: two-integer-sum-ii
+  unique-paths: count-paths
+  valid-anagram: is-anagram
+  valid-palindrome: is-palindrome
+  valid-parentheses: validate-parentheses
+  validate-binary-search-tree: valid-binary-search-tree
+  walls-and-gates: islands-and-treasure
+  word-search: search-for-word
+  word-search-ii: search-for-word-ii

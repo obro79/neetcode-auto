@@ -2,6 +2,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
+from app.core.srs_config import get_srs_config
 from app.core.timezone import today_vancouver
 from app.enums import Confidence
 from app.models.problem import Problem
@@ -15,11 +16,11 @@ async def complete_problem(
     slug: str,
     confidence: Confidence | None,
 ) -> CompletionResponse:
+    config = get_srs_config()
+    resolved_slug = config.resolve_slug(slug)
     today = today_vancouver()
     stmt = (
-        select(Problem)
-        .where(Problem.slug == slug)
-        .options(selectinload(Problem.progress))
+        select(Problem).where(Problem.slug == resolved_slug).options(selectinload(Problem.progress))
     )
     result = await session.execute(stmt)
     problem = result.scalar_one_or_none()

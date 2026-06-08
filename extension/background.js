@@ -2,6 +2,12 @@ const DEFAULT_CONFIG = {
   apiBaseUrl: "https://neetcode-auto-production.up.railway.app",
   apiKey: "",
   autoSync: true,
+  debugMode: false,
+};
+
+const DEFAULT_PUBLIC_CONFIG = {
+  slug_aliases: {},
+  sync_only_daily_set: false,
 };
 
 chrome.runtime.onInstalled.addListener(async () => {
@@ -9,20 +15,58 @@ chrome.runtime.onInstalled.addListener(async () => {
   if (!stored.config) {
     await chrome.storage.local.set({ config: DEFAULT_CONFIG });
   }
+  await refreshPublicConfig();
 });
+
+chrome.runtime.onStartup.addListener(() => {
+  void refreshPublicConfig();
+});
+
+async function refreshPublicConfig() {
+  const { config } = await chrome.storage.local.get("config");
+  const settings = config || DEFAULT_CONFIG;
+  if (!settings.apiBaseUrl) return;
+
+  try {
+    const response = await fetch(`${settings.apiBaseUrl}/config/public`);
+    if (!response.ok) return;
+    const publicConfig = await response.json();
+    await chrome.storage.local.set({ publicConfig });
+  } catch (_error) {
+    // Keep cached config on network failure.
+  }
+}
+
+function resolveSlug(slug, publicConfig) {
+  const aliases = publicConfig?.slug_aliases || {};
+  return aliases[slug] || slug;
+}
 
 chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   if (message.action === "getConfig") {
-    chrome.storage.local.get("config").then(({ config }) => {
-      sendResponse({ config: config || DEFAULT_CONFIG });
+    chrome.storage.local.get(["config", "publicConfig"]).then(({ config, publicConfig }) => {
+      sendResponse({
+        config: config || DEFAULT_CONFIG,
+        publicConfig: publicConfig || DEFAULT_PUBLIC_CONFIG,
+      });
+    });
+    return true;
+  }
+
+  if (message.action === "resolveSlug") {
+    chrome.storage.local.get("publicConfig").then(({ publicConfig }) => {
+      sendResponse({
+        slug: resolveSlug(message.slug, publicConfig || DEFAULT_PUBLIC_CONFIG),
+      });
     });
     return true;
   }
 
   if (message.action === "saveConfig") {
-    chrome.storage.local.set({ config: message.config }).then(() => {
-      sendResponse({ success: true });
-    });
+    chrome.storage.local
+      .set({ config: message.config })
+      .then(() => refreshPublicConfig())
+      .then(() => sendResponse({ success: true }));
     return true;
   }
 
@@ -48,14 +92,19 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 });
 
 async function syncCompletion(payload) {
-  const { config } = await chrome.storage.local.get("config");
+  const { config, publicConfig } = await chrome.storage.local.get([
+    "config",
+    "publicConfig",
+  ]);
   const settings = config || DEFAULT_CONFIG;
+  const pub = publicConfig || DEFAULT_PUBLIC_CONFIG;
 
   if (!settings.autoSync) {
     return { success: false, skipped: true, reason: "auto-sync disabled" };
   }
 
-  const dedupeKey = `${payload.slug}:${payload.submissionId || payload.submittedAt}`;
+  const resolvedSlug = resolveSlug(payload.slug, pub);
+  const dedupeKey = `${resolvedSlug}:${payload.submissionId || payload.submittedAt}`;
   const { syncedKeys = {} } = await chrome.storage.local.get("syncedKeys");
   if (syncedKeys[dedupeKey]) {
     return { success: true, skipped: true, reason: "already synced" };
@@ -68,9 +117,9 @@ async function syncCompletion(payload) {
       "X-API-Key": settings.apiKey,
     },
     body: JSON.stringify({
-      slug: payload.slug,
+      slug: resolvedSlug,
       source: payload.source,
-      confidence: null,
+      confidence: payload.confidence ?? null,
     }),
   });
 
@@ -85,11 +134,12 @@ async function syncCompletion(payload) {
 
   await chrome.storage.local.set({
     lastSync: {
-      slug: payload.slug,
+      slug: resolvedSlug,
       source: payload.source,
       status: "synced",
       at: new Date().toISOString(),
       reviewStage: result.review_stage,
+      confidence: payload.confidence,
     },
   });
 

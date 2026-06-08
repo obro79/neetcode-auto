@@ -2,11 +2,10 @@ from collections import Counter
 from dataclasses import dataclass
 from datetime import date
 
+from app.core.srs_config import SrsConfig, get_srs_config
 from app.enums import (
     CONFIDENCE_PRIORITY,
     DIFFICULTY_ORDER,
-    EXCLUDED_PATTERNS,
-    FOCUS_PATTERN_ORDER,
     Confidence,
     DailySlot,
     Difficulty,
@@ -62,28 +61,33 @@ def select_reviews(
     count: int = 4,
 ) -> list[ProblemCandidate]:
     due = [
-        c
-        for c in candidates
-        if c.solved and c.next_review is not None and c.next_review <= today
+        c for c in candidates if c.solved and c.next_review is not None and c.next_review <= today
     ]
     due.sort(key=_review_sort_key)
     return due[:count]
 
 
-def _unsolved_by_pattern(candidates: list[ProblemCandidate]) -> Counter[str]:
+def _unsolved_by_pattern(
+    candidates: list[ProblemCandidate],
+    excluded_patterns: set[str],
+) -> Counter[str]:
     counts: Counter[str] = Counter()
     for candidate in candidates:
-        if not candidate.solved and candidate.pattern not in EXCLUDED_PATTERNS:
+        if not candidate.solved and candidate.pattern not in excluded_patterns:
             counts[candidate.pattern] += 1
     return counts
 
 
-def _pick_focus_pattern(candidates: list[ProblemCandidate]) -> str | None:
-    unsolved_counts = _unsolved_by_pattern(candidates)
+def _pick_focus_pattern(
+    candidates: list[ProblemCandidate],
+    config: SrsConfig,
+) -> str | None:
+    excluded = config.excluded_patterns
+    unsolved_counts = _unsolved_by_pattern(candidates, excluded)
     if not unsolved_counts:
         return None
 
-    for pattern in FOCUS_PATTERN_ORDER:
+    for pattern in config.daily_set.focus_pattern_order:
         if unsolved_counts.get(pattern, 0) > 0:
             return pattern
 
@@ -103,14 +107,16 @@ def select_focused_new(
     count: int = 2,
     *,
     exclude_ids: set[int] | None = None,
+    excluded_patterns: set[str] | None = None,
 ) -> list[ProblemCandidate]:
     exclude_ids = exclude_ids or set()
+    excluded_patterns = excluded_patterns or set()
     pool = [
         c
         for c in candidates
         if not c.solved
         and c.pattern == focus_pattern
-        and c.pattern not in EXCLUDED_PATTERNS
+        and c.pattern not in excluded_patterns
         and c.problem_id not in exclude_ids
     ]
     pool.sort(key=_new_sort_key)
@@ -123,13 +129,15 @@ def select_random_new(
     count: int = 2,
     *,
     exclude_ids: set[int] | None = None,
+    excluded_patterns: set[str] | None = None,
 ) -> list[ProblemCandidate]:
     exclude_ids = exclude_ids or set()
+    excluded_patterns = excluded_patterns or set()
     pool = [
         c
         for c in candidates
         if not c.solved
-        and c.pattern not in EXCLUDED_PATTERNS
+        and c.pattern not in excluded_patterns
         and c.pattern != focus_pattern
         and c.problem_id not in exclude_ids
     ]
@@ -152,17 +160,37 @@ def select_random_new(
     return pool[:count]
 
 
-def build_daily_set(candidates: list[ProblemCandidate], today: date) -> SelectedDailySet:
-    review = select_reviews(candidates, today)
+def build_daily_set(
+    candidates: list[ProblemCandidate],
+    today: date,
+    config: SrsConfig | None = None,
+) -> SelectedDailySet:
+    cfg = config or get_srs_config()
+    ds = cfg.daily_set
+    excluded = cfg.excluded_patterns
+
+    review = select_reviews(candidates, today, count=ds.review_count)
     used_ids = {c.problem_id for c in review}
 
-    focus_pattern = _pick_focus_pattern(candidates)
+    focus_pattern = _pick_focus_pattern(candidates, cfg)
     focused_new: list[ProblemCandidate] = []
     if focus_pattern:
-        focused_new = select_focused_new(candidates, focus_pattern, exclude_ids=used_ids)
+        focused_new = select_focused_new(
+            candidates,
+            focus_pattern,
+            count=ds.focused_new_count,
+            exclude_ids=used_ids,
+            excluded_patterns=excluded,
+        )
         used_ids.update(c.problem_id for c in focused_new)
 
-    random_new = select_random_new(candidates, focus_pattern, exclude_ids=used_ids)
+    random_new = select_random_new(
+        candidates,
+        focus_pattern,
+        count=ds.random_new_count,
+        exclude_ids=used_ids,
+        excluded_patterns=excluded,
+    )
 
     return SelectedDailySet(
         focus_pattern=focus_pattern,

@@ -21,7 +21,7 @@ async def get_today_daily_set(
 
 @router.post("/today/send", response_model=SendDailyResponse)
 async def send_today_daily_set(
-    attempt: int = 1,
+    attempt: int | None = None,
     session: AsyncSession = Depends(get_session),
     _: None = Depends(verify_api_key),
 ) -> SendDailyResponse:

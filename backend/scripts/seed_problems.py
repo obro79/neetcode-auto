@@ -1,19 +1,17 @@
-"""Seed problems and initial user_progress rows from data/neetcode_250.json."""
+"""Seed problems and initial user_progress rows from the configured catalog JSON."""
 
 from __future__ import annotations
 
 import asyncio
 import json
-from pathlib import Path
 
 from sqlalchemy import select
 
+from app.core.srs_config import get_srs_config
 from app.database.session import AsyncSessionLocal
 from app.enums import Difficulty, ReviewStage
 from app.models.problem import Problem
 from app.models.user_progress import UserProgress
-
-DATA_PATH = Path(__file__).resolve().parents[1] / "data" / "neetcode_250.json"
 
 
 def _normalize_difficulty(value: str) -> Difficulty:
@@ -28,7 +26,9 @@ def _full_neetcode_url(relative_url: str) -> str:
 
 
 async def seed() -> None:
-    payload = json.loads(DATA_PATH.read_text(encoding="utf-8"))
+    config = get_srs_config()
+    data_path = config.resolve_catalog_path()
+    payload = json.loads(data_path.read_text(encoding="utf-8"))
     problems = payload["problems"]
 
     async with AsyncSessionLocal() as session:
@@ -58,7 +58,7 @@ async def seed() -> None:
             session.add(progress)
 
         await session.commit()
-        print(f"Seeded {len(problems)} problems.")
+        print(f"Seeded {len(problems)} problems from {data_path}.")
 
 
 if __name__ == "__main__":

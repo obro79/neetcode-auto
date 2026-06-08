@@ -1,6 +1,9 @@
+import asyncio
+
 import resend
 
 from app.core.config import get_settings
+from app.core.srs_config import get_srs_config
 from app.schemas.daily_set import DailySetOut
 
 
@@ -14,9 +17,11 @@ def _render_section(title: str, items: list, focus_pattern: str | None = None) -
 
     lines.append("<ol>")
     for item in items:
+        done_marker = " ✓" if item.completed else ""
+        style = ' style="text-decoration: line-through; color: #666;"' if item.completed else ""
         lines.append(
-            "<li>"
-            f"{item.title} | {item.pattern} | {item.difficulty.value.title()} | "
+            f"<li{style}>"
+            f"{item.title}{done_marker} | {item.pattern} | {item.difficulty.value.title()} | "
             f'<a href="{item.neetcode_url}">NeetCode</a> | '
             f'<a href="{item.leetcode_url}">LeetCode</a>'
             "</li>"
@@ -47,8 +52,10 @@ def build_daily_email_text(daily_set: DailySetOut) -> str:
             lines.append("")
             return
         for index, item in enumerate(items, start=1):
+            done_marker = " [done]" if item.completed else ""
             lines.append(
-                f"{index}. {item.title} | {item.pattern} | {item.difficulty.value.title()} | "
+                f"{index}. {item.title}{done_marker} | {item.pattern} | "
+                f"{item.difficulty.value.title()} | "
                 f"NeetCode: {item.neetcode_url} | LeetCode: {item.leetcode_url}"
             )
         lines.append("")
@@ -59,18 +66,23 @@ def build_daily_email_text(daily_set: DailySetOut) -> str:
     return "\n".join(lines)
 
 
-def send_daily_email(daily_set: DailySetOut) -> str:
+def _send_daily_email_sync(daily_set: DailySetOut) -> str:
     settings = get_settings()
+    srs = get_srs_config()
     resend.api_key = settings.resend_api_key
 
     subject = f"Daily NeetCode Set - {daily_set.set_date}"
     response = resend.Emails.send(
         {
-            "from": settings.email_from,
-            "to": [settings.email_to],
+            "from": settings.email_from or srs.email.from_address,
+            "to": [settings.email_to or srs.email.to],
             "subject": subject,
             "html": build_daily_email_html(daily_set),
             "text": build_daily_email_text(daily_set),
         }
     )
     return response.get("id", "sent")
+
+
+async def send_daily_email(daily_set: DailySetOut) -> str:
+    return await asyncio.to_thread(_send_daily_email_sync, daily_set)

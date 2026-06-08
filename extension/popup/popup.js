@@ -1,6 +1,7 @@
 const apiBaseUrlInput = document.getElementById("apiBaseUrl");
 const apiKeyInput = document.getElementById("apiKey");
 const autoSyncInput = document.getElementById("autoSync");
+const debugModeInput = document.getElementById("debugMode");
 const saveBtn = document.getElementById("saveBtn");
 const manualBtn = document.getElementById("manualBtn");
 const statusEl = document.getElementById("status");
@@ -20,6 +21,7 @@ async function loadConfig() {
     apiBaseUrlInput.value = config.apiBaseUrl || "";
     apiKeyInput.value = config.apiKey || "";
     autoSyncInput.checked = Boolean(config.autoSync);
+    debugModeInput.checked = Boolean(config.debugMode);
   }
   if (lastSync) {
     lastSyncEl.textContent = `Last sync: ${lastSync.slug} (${lastSync.status}) at ${lastSync.at}`;
@@ -31,6 +33,7 @@ saveBtn.addEventListener("click", async () => {
     apiBaseUrl: apiBaseUrlInput.value.trim().replace(/\/$/, ""),
     apiKey: apiKeyInput.value.trim(),
     autoSync: autoSyncInput.checked,
+    debugMode: debugModeInput.checked,
   };
   await chrome.storage.local.set({ config });
   setStatus("Settings saved");

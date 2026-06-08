@@ -13,6 +13,7 @@ class DailySetItemOut(BaseModel):
     leetcode_url: str
     neetcode_url: str
     slot: DailySlot
+    completed: bool = False
 
 
 class DailySetOut(BaseModel):

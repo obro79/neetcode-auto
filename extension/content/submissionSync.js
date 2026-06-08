@@ -3,6 +3,13 @@
     ? "neetcode"
     : "leetcode";
 
+  const CONFIDENCE_OPTIONS = [
+    { value: "struggling", label: "Struggling" },
+    { value: "getting_there", label: "Getting There" },
+    { value: "solid", label: "Solid" },
+    { value: null, label: "Skip" },
+  ];
+
   function slugFromUrl() {
     const match = window.location.pathname.match(/\/problems\/([^/]+)/);
     return match ? match[1] : null;
@@ -94,10 +101,69 @@
     }
   }
 
-  async function handleAccepted(submissionId) {
-    const slug = slugFromUrl();
-    if (!slug) return;
+  function removeConfidencePicker() {
+    const existing = document.getElementById("neetcode-srs-confidence");
+    if (existing) existing.remove();
+  }
 
+  function showConfidencePicker(slug, submissionId) {
+    removeConfidencePicker();
+
+    const panel = document.createElement("div");
+    panel.id = "neetcode-srs-confidence";
+    Object.assign(panel.style, {
+      position: "fixed",
+      bottom: "72px",
+      right: "20px",
+      zIndex: "99999",
+      padding: "12px",
+      borderRadius: "10px",
+      background: "#101828",
+      color: "#fff",
+      fontFamily: "system-ui, sans-serif",
+      fontSize: "13px",
+      boxShadow: "0 8px 24px rgba(0,0,0,0.25)",
+      minWidth: "220px",
+    });
+
+    const title = document.createElement("p");
+    title.textContent = "How did it go?";
+    title.style.margin = "0 0 8px";
+    panel.appendChild(title);
+
+    const buttonRow = document.createElement("div");
+    buttonRow.style.display = "flex";
+    buttonRow.style.flexWrap = "wrap";
+    buttonRow.style.gap = "6px";
+
+    CONFIDENCE_OPTIONS.forEach((option) => {
+      const button = document.createElement("button");
+      button.textContent = option.label;
+      Object.assign(button.style, {
+        border: "1px solid #344054",
+        background: option.value ? "#1d2939" : "#475467",
+        color: "#fff",
+        borderRadius: "6px",
+        padding: "6px 8px",
+        cursor: "pointer",
+        fontSize: "12px",
+      });
+      button.addEventListener("click", () => {
+        removeConfidencePicker();
+        if (option.value === null) {
+          notify("Skipped SRS sync");
+          return;
+        }
+        postCompletion(slug, submissionId, option.value);
+      });
+      buttonRow.appendChild(button);
+    });
+
+    panel.appendChild(buttonRow);
+    document.documentElement.appendChild(panel);
+  }
+
+  function postCompletion(slug, submissionId, confidence) {
     chrome.runtime.sendMessage(
       {
         action: "syncCompletion",
@@ -106,6 +172,7 @@
           source: SOURCE,
           submissionId: submissionId || `${Date.now()}`,
           submittedAt: new Date().toISOString(),
+          confidence,
         },
       },
       (response) => {
@@ -119,6 +186,23 @@
         } else {
           notify(response?.error || "SRS sync failed", true);
         }
+      }
+    );
+  }
+
+  async function handleAccepted(submissionId) {
+    const rawSlug = slugFromUrl();
+    if (!rawSlug) return;
+
+    chrome.runtime.sendMessage(
+      { action: "resolveSlug", slug: rawSlug },
+      (response) => {
+        if (chrome.runtime.lastError) {
+          showConfidencePicker(rawSlug, submissionId);
+          return;
+        }
+        const slug = response?.slug || rawSlug;
+        showConfidencePicker(slug, submissionId);
       }
     );
   }

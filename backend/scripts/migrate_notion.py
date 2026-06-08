@@ -43,9 +43,7 @@ async def migrate(path: Path) -> None:
                 print(f"Skipping unknown slug: {row['slug']}")
                 continue
 
-            progress_stmt = select(UserProgress).where(
-                UserProgress.problem_id == problem.id
-            )
+            progress_stmt = select(UserProgress).where(UserProgress.problem_id == problem.id)
             progress = (await session.execute(progress_stmt)).scalar_one()
             progress.solved = bool(row.get("solved", False))
             progress.review_stage = ReviewStage(row["review_stage"])

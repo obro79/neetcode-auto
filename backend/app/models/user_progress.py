@@ -1,7 +1,7 @@
-from datetime import date
+from datetime import date, datetime
 from typing import TYPE_CHECKING
 
-from sqlalchemy import Boolean, Date, Enum, ForeignKey, UniqueConstraint
+from sqlalchemy import Boolean, Date, DateTime, Enum, ForeignKey, UniqueConstraint, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.enums import Confidence, DailySlot, ReviewStage, enum_values
@@ -31,6 +31,11 @@ class UserProgress(Base):
     daily_slot: Mapped[DailySlot | None] = mapped_column(
         Enum(DailySlot, name="daily_slot", values_callable=enum_values),
         nullable=True,
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        server_default=func.now(),
+        onupdate=func.now(),
     )
 
     problem: Mapped["Problem"] = relationship(back_populates="progress")

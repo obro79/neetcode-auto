@@ -93,6 +93,7 @@ async def create_daily_set(
 
 def _item_out(item: DailySetItem) -> DailySetItemOut:
     problem = item.problem
+    progress = problem.progress
     return DailySetItemOut(
         slug=problem.slug,
         title=problem.title,
@@ -101,6 +102,7 @@ def _item_out(item: DailySetItem) -> DailySetItemOut:
         leetcode_url=problem.leetcode_url,
         neetcode_url=problem.neetcode_url,
         slot=item.slot,
+        completed=progress.daily_slot == DailySlot.DONE,
     )
 
 

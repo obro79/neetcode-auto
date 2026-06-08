@@ -28,9 +28,7 @@ class DailySet(Base):
 
 class DailySetItem(Base):
     __tablename__ = "daily_set_items"
-    __table_args__ = (
-        UniqueConstraint("daily_set_id", "problem_id", name="uq_daily_set_problem"),
-    )
+    __table_args__ = (UniqueConstraint("daily_set_id", "problem_id", name="uq_daily_set_problem"),)
 
     id: Mapped[int] = mapped_column(primary_key=True)
     daily_set_id: Mapped[int] = mapped_column(ForeignKey("daily_sets.id"), index=True)

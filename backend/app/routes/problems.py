@@ -16,11 +16,7 @@ async def list_problems(
     session: AsyncSession = Depends(get_session),
     _: None = Depends(verify_api_key),
 ) -> list[ProblemWithProgressOut]:
-    stmt = (
-        select(Problem)
-        .options(selectinload(Problem.progress))
-        .order_by(Problem.sort_order)
-    )
+    stmt = select(Problem).options(selectinload(Problem.progress)).order_by(Problem.sort_order)
     result = await session.execute(stmt)
     problems = result.scalars().all()
 
