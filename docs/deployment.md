@@ -40,6 +40,7 @@ Replace the legacy two-service 7:00/7:30 UTC crons with **one** poller:
 |---------|---------------|------------|-------------|
 | `neetcode-auto` | Dockerfile `CMD` → `start.sh` | *(none)* | `backend/railway.toml` |
 | `send-daily` | `python -m app.jobs.send_daily` | `*/15 * * * *` | `backend/railway.send-daily.toml` |
+| `send-jobs` | `python -m app.jobs.send_job_digest` | `*/15 * * * *` | `backend/railway.send-jobs.toml` |
 
 The job reads `email.anchor_time` and `email.backoff_minutes` from YAML. Default backoff: 7:00, 7:30, 8:30, 10:30 in `America/Vancouver` — no manual UTC edits when DST changes.
 
@@ -53,7 +54,18 @@ Copy the same app env vars as the API service. Omit `PORT` on cron services.
 
 Legacy files `railway.send-daily-1.toml` and `railway.send-daily-2.toml` remain for reference but are superseded.
 
-### Dashboard steps
+### Dashboard steps — `send-jobs` (internship radar)
+
+1. Open project → service **send-jobs**
+2. **Settings → Source**: repo `obro79/neetcode-auto`, branch `main`, root **`backend`**
+3. **Config-as-code**: `railway.send-jobs.toml`
+4. **Variables**: same as `send-daily` (`DATABASE_URL`, `RESEND_API_KEY`, `EMAIL_*`, `TIMEZONE`, `API_KEY`, etc.). Omit `PORT`.
+5. Deploy from GitHub (not `railway up` from laptop — that uses `railway.toml` and starts the API). Confirm `cronSchedule` is `*/15 * * * *` and start command is `python -m app.jobs.send_job_digest`.
+6. One-off test: `cd backend && railway service link send-jobs && railway run uv run python -m app.jobs.send_job_digest --dry-run`
+
+Revision `003` adds `job_listings` and `job_digest_logs`. Run `uv run alembic upgrade head` against production `DATABASE_URL` before the first cron window.
+
+### Dashboard steps — `send-daily`
 
 1. Open project → service **send-daily**
 2. **Settings → Source**: repo `obro79/neetcode-auto`, branch `main`, root **`backend`**
@@ -72,6 +84,8 @@ uv run alembic upgrade head
 ```
 
 Revision `002` adds `email_log.success`, `email_log.resend_id`, and `user_progress.updated_at`.
+
+Revision `003` adds `job_listings` and `job_digest_logs` (internship job radar).
 
 ## Chrome extension cutover
 
