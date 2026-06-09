@@ -1,0 +1,56 @@
+timezone: America/Vancouver
+
+source:
+  listings_url: https://raw.githubusercontent.com/SimplifyJobs/Summer2026-Internships/dev/.github/scripts/listings.json
+  branch: dev
+
+filters:
+  terms:
+    - "Fall 2025"
+    - "Winter 2026"
+    - "Spring 2026"
+  locations: []
+  location_default: north_america
+  categories:
+    - software_engineering
+    - data_science_ai_ml
+    - quantitative_finance
+  exclude_categories:
+    - product_management
+  exclude_title_patterns:
+    - "Product Manager"
+    - "PM Intern"
+  require_sponsorship: true
+  require_us_citizen: false
+
+ranking:
+  top_n: 10
+  weights:
+    bm25: 1.0
+    company_tier: 0.3
+    recency_days: 0.2
+    backend_boost: 0.25
+    python_boost: 0.15
+    new_today_boost: 0.4
+  backend_keywords:
+    - backend
+    - platform
+    - infra
+    - api
+    - services
+  python_keywords:
+    - python
+    - django
+    - fastapi
+    - flask
+  preferred_companies: []
+
+email:
+  to: owenfisher46@gmail.com
+  from_address: "Internship Radar <onboarding@resend.dev>"
+  anchor_times:
+    - "09:00"
+    - "12:00"
+    - "15:00"
+  send_only_if_new: true
+  include_full_list: true

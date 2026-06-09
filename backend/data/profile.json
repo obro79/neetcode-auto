@@ -1,0 +1,29 @@
+{
+  "name": "Owen Fisher",
+  "grad_year": 2027,
+  "degree": "BS CS",
+  "work_authorization": "US citizen",
+  "skills": [
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "backend",
+    "API design",
+    "distributed systems"
+  ],
+  "preferred_roles": [
+    "backend intern",
+    "platform intern",
+    "data engineer intern",
+    "software engineer intern"
+  ],
+  "preferred_companies": [
+    "Stripe",
+    "Databricks",
+    "Anthropic",
+    "Scale AI",
+    "Palantir"
+  ],
+  "blacklisted_companies": [],
+  "notes": "Prefer Python/backend/API roles over frontend/mobile"
+}

@@ -17,13 +17,18 @@ from app.models.user_progress import UserProgress
 @pytest.fixture(autouse=True)
 def clear_config_caches():
     from app.core.config import get_settings
+    from app.core.jobs_config import get_jobs_config, get_profile
     from app.core.srs_config import get_srs_config
 
     get_settings.cache_clear()
     get_srs_config.cache_clear()
+    get_jobs_config.cache_clear()
+    get_profile.cache_clear()
     yield
     get_settings.cache_clear()
     get_srs_config.cache_clear()
+    get_jobs_config.cache_clear()
+    get_profile.cache_clear()
 
 
 @pytest_asyncio.fixture

@@ -13,6 +13,8 @@ class Settings(BaseSettings):
     email_to: str = "owenfisher46@gmail.com"
     timezone: str = "America/Vancouver"
     srs_config_path: str = ""
+    jobs_config_path: str = ""
+    profile_path: str = ""
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
