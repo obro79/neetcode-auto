@@ -1,0 +1,278 @@
+:root {
+  color-scheme: light dark;
+  --bg: #0f1419;
+  --surface: #1a2332;
+  --surface-2: #243044;
+  --text: #e8eef7;
+  --muted: #9fb0c7;
+  --accent: #5b9dff;
+  --accent-soft: rgba(91, 157, 255, 0.15);
+  --success: #4ade80;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --border: #2d3b52;
+  --radius: 12px;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #0b1016 0%, var(--bg) 100%);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+#app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+header.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+header.page-header h1 {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+header.page-header p {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 0.55rem 0.9rem;
+  cursor: pointer;
+}
+
+button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #081018;
+  font-weight: 600;
+}
+
+button:hover {
+  filter: brightness(1.05);
+}
+
+.login-card,
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+.login-card {
+  max-width: 480px;
+  margin: 4rem auto;
+}
+
+.login-card h1 {
+  margin-top: 0;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.field label {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.field input {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  padding: 0.65rem 0.75rem;
+}
+
+.status {
+  min-height: 1.25rem;
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.status.error {
+  color: var(--danger);
+}
+
+.status.ok {
+  color: var(--success);
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.stats-grid {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+
+.stat-card .label {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.stat-card .value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-top: 0.35rem;
+}
+
+.layout {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 900px) {
+  .layout-two {
+    grid-template-columns: 1.2fr 1fr;
+  }
+}
+
+.panel h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.55rem 0.4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.badge.done {
+  background: rgba(74, 222, 128, 0.15);
+  color: var(--success);
+}
+
+.badge.due {
+  background: rgba(251, 191, 36, 0.15);
+  color: var(--warning);
+}
+
+.empty {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.confidence-grid,
+.stage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.75rem;
+}
+
+.mini-stat {
+  background: var(--surface-2);
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+
+.mini-stat .label {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.mini-stat .value {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 0.2rem;
+}
+
+.progress-bar {
+  height: 8px;
+  background: var(--surface-2);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 0.35rem;
+}
+
+.progress-bar > span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+}
+
+.pattern-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.65rem;
+}
+
+.pattern-row .meta {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.toolbar {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}

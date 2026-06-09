@@ -32,6 +32,42 @@ Apply migration 003 before first run:
 uv run alembic upgrade head
 ```
 
+## Dashboard
+
+Static dashboard at `/dashboard` (same API key as the browser extension).
+
+### Local development
+
+```bash
+# Terminal 1 — API
+uv run uvicorn app.main:app --reload
+
+# Terminal 2 — dashboard dev server (proxyless; set API URL in login UI)
+cd ../dashboard
+npm install
+npm run dev
+```
+
+For the integrated path served by FastAPI:
+
+```bash
+cd ../dashboard
+npm install
+npm run build
+# then open http://127.0.0.1:8000/dashboard/
+```
+
+### Production Docker image
+
+Railway builds from `backend/` only. Bundle the dashboard before deploy:
+
+```bash
+./scripts/prepare_dashboard.sh
+docker build -t neetcode-auto .
+```
+
+`prepare_dashboard.sh` builds `../dashboard` and copies output to `backend/dashboard_dist/`, which the Dockerfile includes and `app.main` mounts at `/dashboard`.
+
 ## Checks
 
 ```bash

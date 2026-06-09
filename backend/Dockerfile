@@ -9,6 +9,9 @@ RUN uv sync --frozen --no-dev
 
 COPY . .
 
+# Optional static dashboard (run scripts/prepare_dashboard.sh before docker build)
+COPY dashboard_dist/ /app/dashboard_dist/
+
 ENV PYTHONPATH=/app
 ENV PATH="/app/.venv/bin:${PATH}"
 

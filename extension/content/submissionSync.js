@@ -39,68 +39,6 @@
     setTimeout(() => toast.remove(), 4000);
   }
 
-  function isAcceptedSubmission(payload) {
-    const text = typeof payload === "string" ? payload : JSON.stringify(payload);
-    if (!text.includes("Accepted")) return false;
-
-    try {
-      const data = typeof payload === "string" ? JSON.parse(payload) : payload;
-      const status =
-        data?.data?.submit?.status ||
-        data?.data?.check?.status ||
-        data?.status ||
-        data?.state;
-      if (status) {
-        return String(status).toLowerCase() === "accepted";
-      }
-    } catch (_error) {
-      // Fall through to substring check.
-    }
-
-    return text.toLowerCase().includes('"accepted"') || text.includes("Accepted");
-  }
-
-  function requestUrl(input) {
-    if (typeof input === "string") return input;
-    if (input instanceof Request) return input.url;
-    if (input?.url) return input.url;
-    return String(input || "");
-  }
-
-  function isSubmissionResultUrl(url) {
-    const u = String(url || "").toLowerCase();
-
-    if (
-      u.includes("executecodefunctionhttp") ||
-      u.includes("/execute") ||
-      u.includes("/run") ||
-      u.includes("/test")
-    ) {
-      return false;
-    }
-
-    if (SOURCE === "leetcode" && u.includes("graphql")) {
-      return true;
-    }
-
-    if (SOURCE === "neetcode") {
-      return u.includes("submit") || u.includes("submissions");
-    }
-
-    return false;
-  }
-
-  async function inspectSubmissionResponse(response, url) {
-    try {
-      const bodyText = await response.text();
-      if (isAcceptedSubmission(bodyText)) {
-        handleAccepted(url);
-      }
-    } catch (_error) {
-      // Ignore parse failures; never throw to caller.
-    }
-  }
-
   function removeConfidencePicker() {
     const existing = document.getElementById("neetcode-srs-confidence");
     if (existing) existing.remove();
@@ -190,7 +128,7 @@
     );
   }
 
-  async function handleAccepted(submissionId) {
+  function handleAccepted(submissionId) {
     const rawSlug = slugFromUrl();
     if (!rawSlug) return;
 
@@ -207,41 +145,36 @@
     );
   }
 
-  const originalFetch = window.fetch;
-  window.fetch = async function (...args) {
-    const url = requestUrl(args[0]);
-    if (!isSubmissionResultUrl(url)) {
-      return originalFetch.apply(this, args);
+  function applyDebugMode() {
+    chrome.storage.local.get("config", ({ config }) => {
+      if (config?.debugMode) {
+        document.documentElement.setAttribute("data-neetcode-srs-debug", "1");
+      } else {
+        document.documentElement.removeAttribute("data-neetcode-srs-debug");
+      }
+    });
+  }
+
+  applyDebugMode();
+  chrome.storage.onChanged.addListener((changes, area) => {
+    if (area === "local" && changes.config) {
+      applyDebugMode();
     }
-
-    const res = await originalFetch.apply(this, args);
-    void inspectSubmissionResponse(res.clone(), url);
-    return res;
-  };
-
-  const originalOpen = XMLHttpRequest.prototype.open;
-  const originalSend = XMLHttpRequest.prototype.send;
-
-  XMLHttpRequest.prototype.open = function (method, url, ...rest) {
-    this._neetcodeUrl = url;
-    this._neetcodeIsSubmission = isSubmissionResultUrl(url);
-    return originalOpen.call(this, method, url, ...rest);
-  };
-
-  XMLHttpRequest.prototype.send = function (...args) {
-    if (this._neetcodeIsSubmission) {
-      this.addEventListener("load", function () {
-        void inspectSubmissionResponse(
-          { text: async () => this.responseText },
-          this._neetcodeUrl || ""
-        );
-      });
-    }
-    return originalSend.apply(this, args);
-  };
+  });
 
   window.addEventListener("message", (event) => {
     if (event.source !== window) return;
+
+    if (event.data?.type === "NEETCODE_SRS_ACCEPTED") {
+      handleAccepted(event.data.submissionId || event.data.url || "accepted");
+      return;
+    }
+
+    if (event.data?.type === "NEETCODE_SRS_DEBUG") {
+      console.debug("[NeetCode SRS]", event.data.message, event.data.detail || "");
+      return;
+    }
+
     if (event.data?.type === "NEETCODE_SRS_MANUAL_SYNC") {
       handleAccepted("manual");
     }

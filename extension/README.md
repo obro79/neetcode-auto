@@ -27,6 +27,15 @@ When a submission is accepted, a small panel asks how it went:
 - **Struggling** / **Getting There** / **Solid** — syncs with confidence to `/completions`
 - **Skip** — no sync
 
+The extension uses a MAIN-world page hook (`pageHook.js`) to intercept submit responses:
+
+- **LeetCode** — GraphQL submit/check responses
+- **NeetCode** — Judge0-style responses (`status.id === 3`) plus `/api` and Firebase function calls, with a DOM fallback when the verdict panel shows **Accepted**
+
+After updating the extension, click **Reload** on `chrome://extensions` and refresh any open problem tabs.
+
+If the picker still does not appear, enable **Debug mode** in the popup, submit again, and check the page console for `[NeetCode SRS]` logs.
+
 ## Manual sync
 
 On a LeetCode or NeetCode problem tab, open the popup and click **Mark current problem done** (same confidence picker flow via content script on next accepted solve, or immediate sync from popup).
